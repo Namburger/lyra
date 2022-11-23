@@ -190,3 +190,20 @@ load("@org_tensorflow//tensorflow:workspace2.bzl", workspace2 = "workspace")
 workspace2()
 
 # End Tensorflow WORKSPACE subset required for TFLite
+
+# Pybind
+http_archive(
+  name = "pybind11_bazel",
+  strip_prefix = "pybind11_bazel-9a24c33cbdc510fa60ab7f5ffb7d80ab89272799",
+  urls = ["https://github.com/pybind/pybind11_bazel/archive/9a24c33cbdc510fa60ab7f5ffb7d80ab89272799.zip"],
+)
+http_archive(
+  name = "pybind11",
+  build_file = "@pybind11_bazel//:pybind11.BUILD",
+  strip_prefix = "pybind11-2.10.0",
+  urls = ["https://github.com/pybind/pybind11/archive/v2.10.0.tar.gz"],
+)
+load("@pybind11_bazel//:python_configure.bzl", "python_configure")
+python_configure(name = "local_config_python")
+
+
